@@ -1,0 +1,150 @@
+html {
+    background: #e5e7eb;
+}
+
+.go-container {
+    height: 600px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+}
+
+.done-title {
+    background: white;
+    padding: 10px 20px;
+    margin: 0;
+}
+
+.editor {
+    width: 90%;
+    max-width: 1100px;
+    height: 600px;
+    margin: 20px 0;
+    box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px,
+        rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.sidebar {
+    flex: 0 0 160px;
+    background: #e3e3e3;
+    padding: 10px 10px;
+    border-right: 1px solid #d3d3d3;
+    background: white;
+}
+
+.sidebar p:hover {
+    cursor: pointer;
+}
+
+.content-container {
+    flex: 1;
+    position: relative;
+    padding: 16px 0;
+    background: #272a36;
+    /* border-top: 1px solid #d3d3d3; */
+}
+
+.file-nav {
+    display: flex;
+    height: 32px;
+    background: #222;
+    overflow-x: scroll;
+}
+
+.file-tab {
+    height: 32px;
+    background: #ddd;
+    background: white;
+    padding: 0 40px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: relative;
+    border-right: 1px solid #d3d3d3;
+    font-weight: bold;
+    /* border-bottom: 1px solid #d3d3d3; */
+}
+
+.file-tab:hover {
+    cursor: pointer;
+}
+
+.file-tab-active {
+    background: #eee;
+    background: white;
+    color: #ec7211;
+    font-weight: bold;
+}
+
+.file-tab p {
+    margin: 0;
+    font-size: 10px;
+}
+
+.content-editor {
+    padding: 20px;
+    height: 580px;
+
+    font-family: monospace;
+    line-height: 1.6;
+}
+
+.content-editor:focus {
+    outline: none;
+}
+
+.inject-button {
+    color: #920a87;
+    border: 1px solid #920a8729;
+    border-radius: 4px;
+    padding: 6px 20px;
+    margin: 5px 0;
+    display: block;
+    width: 100%;
+    font-size: 10px;
+    background: white;
+    z-index: 1000;
+}
+
+.inject-button:hover {
+    cursor: pointer;
+}
+
+.inject-template-button {
+    color: #1511ec;
+    border: 1px solid #1511ec26;
+    border-radius: 4px;
+    padding: 6px 20px;
+    margin: 5px 0;
+    display: block;
+    width: 100%;
+    font-size: 10px;
+    background: white;
+    z-index: 1000;
+}
+
+.inject-tempalte-button:hover {
+    cursor: pointer;
+}
+
+.visual-button {
+    color: #474747;
+    border: 1px solid #47474726;
+    border-radius: 4px;
+    padding: 6px 20px;
+    margin: 5px 0;
+    display: block;
+    width: 100%;
+    font-size: 10px;
+    background: white;
+    z-index: 1000;
+}
+
+.visual-button :hover {
+    cursor: pointer;
+}

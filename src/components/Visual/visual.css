@@ -1,0 +1,87 @@
+.visual-editor {
+    width: 90%;
+    max-width: 1100px;
+    height: 600px;
+    margin: 0px 0;
+    box-shadow: rgb(0 0 0 / 20%) 0px 2px 1px -1px,
+        rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    overflow: hidden;
+
+    background: white;
+    margin-top: 0px;
+}
+
+.title-block {
+    border: none;
+    font-size: 30px;
+    font-weight: 800;
+    /* transform: translate(0px, 25px) !important; */
+    text-align: left;
+    color: #c8cace;
+    margin-left: -30px;
+}
+.title-block .react-flow__handle {
+    display: none;
+}
+
+.cost-block {
+    border: none;
+
+    /* transform: translate(0px, 25px) !important; */
+    text-align: left;
+    color: #c8cace;
+}
+.cost-block .react-flow__handle {
+    display: none;
+}
+
+.react-flow__handle {
+    background: #6e739a !important;
+    display: none;
+}
+
+.starting-block {
+    width: 100px;
+
+    border: none;
+    background: #efeff1;
+    color: black;
+}
+
+.middle-block {
+    width: 100px;
+}
+
+.last-block {
+    width: 100px;
+}
+
+.guard-block {
+    border: none;
+    background: #f59ec9;
+}
+
+.add-block {
+    border: none;
+    background: #fbc8a9;
+}
+
+.db-block {
+    border: none;
+    background: #bb8cf7;
+}
+
+.emit-event-block {
+    border: none;
+    background: #f0f78c;
+}
+
+.receive-event-block {
+    border: none;
+    background: #f0f78c;
+}

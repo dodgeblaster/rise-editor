@@ -1,0 +1,28 @@
+.header-container {
+    background: #272a36;
+    /* padding: 10px 0; */
+    height: 40px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+    --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+        var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.header-inner {
+    width: 90%;
+    max-width: 1100px;
+    color: white;
+    font-family: sans-serif;
+
+    color: #272a36;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
