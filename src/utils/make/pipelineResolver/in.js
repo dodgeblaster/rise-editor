@@ -209,7 +209,7 @@ const makeEmitEvent = (props) => {
             value = value.replace('#', '$ctx.stash.dbresult.')
         }
 
-        detail = detail + `\\\"${x}\\\": \\\"${value}\\\"`
+        detail = detail + `\\\"${x}\\\": \\\"${value}\\\"` // eslint-disable-line
 
         if (i + 1 < array.length) {
             detail = detail + ','
@@ -493,7 +493,7 @@ const eventBridgeTrigger = ({
                     Environment: {
                         Variables: {
                             REGION: {
-                                'Fn::Sub': ['${AWS::Region}', {}]
+                                'Fn::Sub': ['${AWS::Region}', {}] // eslint-disable-line
                             },
                             ENDPOINT: {
                                 'Fn::GetAtt': ['GraphQlApi', 'GraphQLUrl']
@@ -702,7 +702,7 @@ const makeEventRule = ({
 
 const indexChar = 'abcdefghijklmnopqrstuvwxyz'.split('')
 
-export default (rise) => {
+export default function main(rise) {
     let res = {}
     Object.keys(rise.resolvers.Query || {}).forEach((k) => {
         const item = rise.resolvers.Query[k]

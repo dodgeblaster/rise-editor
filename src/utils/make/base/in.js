@@ -277,7 +277,7 @@ const datasource = ({ dbName, region, apiName }) => {
                                         Resource: [
                                             {
                                                 'Fn::Sub': [
-                                                    'arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/' +
+                                                    'arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/' + // eslint-disable-line
                                                         dbName,
                                                     {}
                                                 ]
@@ -351,7 +351,7 @@ const datasourceEventBridge = ({ eventBus, region, apiName }) => {
                                         Resource: [
                                             {
                                                 'Fn::Sub': [
-                                                    'arn:aws:events:${AWS::Region}:${AWS::AccountId}:event-bus/' +
+                                                    'arn:aws:events:${AWS::Region}:${AWS::AccountId}:event-bus/' + // eslint-disable-line
                                                         eventBus,
                                                     {}
                                                 ]
@@ -387,144 +387,7 @@ const datasourceEventBridge = ({ eventBus, region, apiName }) => {
 
 */
 
-const eventBridgeTrigger = ({ apiName }) => {
-    const code = `
-const env = require("process").env;
-const AWS = require("aws-sdk");
-const URL = require("url");
-const https = require('https');
-
-AWS.config.update({
-  region: process.env.REGION,
-  credentials: new AWS.Credentials(
-    env.AWS_ACCESS_KEY_ID,
-    env.AWS_SECRET_ACCESS_KEY,
-    env.AWS_SESSION_TOKEN
-  ),
-});
-
-module.exports.handler = (props) => {
-    const input = JSON.parse(props)
-    const body = {
-        query: input.query.split(\`'\`).join(\`"\`),
-        variables: {
-            input: input.input
-        }
-    }
-    const uri = URL.parse(process.env.ENDPOINT);
-    const httpRequest = new AWS.HttpRequest(uri.href, process.env.REGION);
-    httpRequest.headers.host = uri.host;
-    httpRequest.headers["Content-Type"] = "application/json";
-    httpRequest.method = "POST";
-    httpRequest.body = JSON.stringify(body);
-
-    const signer = new AWS.Signers.V4(httpRequest, "appsync", true);
-    signer.addAuthorization(AWS.config.credentials, AWS.util.date.getDate());
-
-    const options = {
-        hostname: uri.href.slice(8, uri.href.length - 8),
-        path: '/graphql',
-        method: httpRequest.method,
-        body: httpRequest.body,
-        headers: httpRequest.headers,
-    };
-
-    const req = https.request(options, res => {
-
-    res.on('data', d => {
-            process.stdout.write(d)
-        })
-    })
-
-    req.on('error', error => {
-        console.error(error.message)
-    })
-
-    req.write(JSON.stringify(body))
-    req.end()
-}`
-
-    return {
-        Resources: {
-            TriggerSubscriptionFunction: {
-                Type: 'AWS::Lambda::Function',
-                Properties: {
-                    Runtime: 'nodejs12.x',
-                    Handler: 'index.handler',
-                    Role: {
-                        'Fn::GetAtt': ['TriggerSubscriptionRole', 'Arn']
-                    },
-                    Code: {
-                        ZipFile: code
-                    },
-                    Environment: {
-                        Variables: {
-                            REGION: {
-                                'Fn::Sub': ['${AWS::Region}', {}]
-                            },
-                            ENDPOINT: {
-                                'Fn::GetAtt': ['GraphQlApi', 'GraphQLUrl']
-                            }
-                        }
-                    }
-                }
-            },
-            TriggerSubscriptionRole: {
-                Type: 'AWS::IAM::Role',
-                Properties: {
-                    RoleName: `TriggerSubscriptionRole${apiName}`,
-                    AssumeRolePolicyDocument: {
-                        Version: '2012-10-17',
-                        Statement: [
-                            {
-                                Effect: 'Allow',
-                                Action: ['sts:AssumeRole'],
-                                Principal: {
-                                    Service: ['lambda.amazonaws.com']
-                                }
-                            }
-                        ]
-                    },
-
-                    Policies: [
-                        {
-                            PolicyName: `TriggerSubscriptionPolicy${apiName}`,
-                            PolicyDocument: {
-                                Version: '2012-10-17',
-
-                                Statement: [
-                                    {
-                                        Effect: 'Allow',
-                                        Action: ['appsync:GraphQL'],
-                                        Resource: [
-                                            {
-                                                'Fn::Join': [
-                                                    '',
-                                                    [
-                                                        {
-                                                            'Fn::GetAtt': [
-                                                                'GraphQlApi',
-                                                                'Arn'
-                                                            ]
-                                                        },
-                                                        '/types/*'
-                                                    ]
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        }
-                    ]
-                }
-            }
-        },
-        Outputs: {}
-    }
-}
-
-export default (rise) => {
+export default function main(rise) {
     const ql = graphQL({
         name: rise.config.name,
         auth: rise.config.auth || false,
@@ -559,9 +422,9 @@ export default (rise) => {
               Outputs: {}
           }
 
-    const triggerFunction = eventBridgeTrigger({
-        apiName: rise.config.name
-    })
+    // const triggerFunction = eventBridgeTrigger({
+    //     apiName: rise.config.name
+    // })
 
     return {
         Resources: {
