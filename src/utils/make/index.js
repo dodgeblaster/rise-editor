@@ -1,7 +1,7 @@
 const base = require('./base/in')
 const resolvers = require('./pipelineResolver/in')
 
-module.exports = (r) => {
+export default (r) => {
     const res = base(r)
     const res2 = resolvers(r)
     const res3 = {

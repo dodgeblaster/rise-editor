@@ -524,7 +524,7 @@ module.exports.handler = (props) => {
     }
 }
 
-module.exports = (rise) => {
+export default (rise) => {
     const ql = graphQL({
         name: rise.config.name,
         auth: rise.config.auth || false,

@@ -702,7 +702,7 @@ const makeEventRule = ({
 
 const indexChar = 'abcdefghijklmnopqrstuvwxyz'.split('')
 
-module.exports = (rise) => {
+export default (rise) => {
     let res = {}
     Object.keys(rise.resolvers.Query || {}).forEach((k) => {
         const item = rise.resolvers.Query[k]
